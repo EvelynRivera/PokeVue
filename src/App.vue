@@ -1,20 +1,27 @@
 <template>
   <h1>Hola Mundo</h1>
+  <div>
+    {{ squirtle }}
+  </div>
 </template>
 <script setup lang="ts">
-import axios from 'axios'
-import { ref, onMounted } from 'vue'
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
 
-   const app = ref()
-   info: []
+// Propiedades reactivas
+const squirtle = ref<any>();
 
-  onMounted(() => {
-    axios
-    .get('https://pokeapi.co/api/v2/pokemon/squirtle')
-    .then(response => {this.info = response.data.pokemon })
-    console.log(response);
-  })
+// Propiedades computadas
 
+// Métodos
+const getData = () => {
+  axios.get('https://pokeapi.co/api/v2/pokemon/squirtle').then((res) => {
+    squirtle.value = res.data;
+  });
+};
 
-
+// Hooks (Métodos del ciclo de vida Vue)
+onMounted(() => {
+  getData();
+});
 </script>
